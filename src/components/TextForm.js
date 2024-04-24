@@ -5,14 +5,17 @@ export default function TextForm(props) {
 
     const handleUpClick = () => {
         setText(text.toUpperCase());
+        props.showAlert("Converted text to uppercase !", "success");
     }
     
     const handleLowClick = () => {
         setText(text.toLowerCase());
+        props.showAlert("Converted text to lowercase !", "success");
     }
 
     const handleClearClick = () => {
         setText('');
+        props.showAlert("Text is deleted !", "warning");
     }
 
     const handleOnChange = (event) => {
@@ -22,12 +25,15 @@ export default function TextForm(props) {
     const handleCopy = () => {
         let text = document.getElementById("myBox");
         text.select();
+        text.setSelectionRange(0, 9999);
         navigator.clipboard.writeText(text.value);
+        props.showAlert("Copied to clipboard!", "success");
     }
 
     const handleCExtraSpaces = () => {
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "));
+        props.showAlert("Extra spaces are handled successfully !", "success");
     }
 
     const [text, setText] = useState('Enter text here ..');
@@ -38,19 +44,19 @@ export default function TextForm(props) {
             <div class="mb-3" style={{color: props.mode === 'light'?'black':'white'}}>
                 <textarea class="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode === 'light'?'white':'#00212b', color: props.mode === 'light'?'black':'white'}} id="myBox" rows="10"></textarea>
             </div>
-            <button className="btn btn-primary" onClick={handleUpClick}>
+            <button className="btn btn-primary my-2 mx-1" onClick={handleUpClick}>
                 Uppercase
             </button>
-            <button className="btn btn-primary mx-3" onClick={handleLowClick}>
+            <button className="btn btn-primary my-2 mx-1" onClick={handleLowClick}>
                 Lowercase
             </button>
-            <button className="btn btn-secondary" onClick={handleCopy}>
+            <button className="btn btn-secondary my-2 mx-1" onClick={handleCopy}>
                 Copy
             </button>
-            <button className="btn btn-danger mx-3" onClick={handleClearClick}>
+            <button className="btn btn-danger my-2 mx-1" onClick={handleClearClick}>
                 Clear
             </button>
-            <button className="btn btn-warning" onClick={handleCExtraSpaces}>
+            <button className="btn btn-warning my-2 mx-1" onClick={handleCExtraSpaces}>
                 Remove Extra Spaces
             </button>
         </div>
