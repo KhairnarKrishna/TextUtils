@@ -37,6 +37,17 @@ export default function TextForm(props) {
     }
 
     const [text, setText] = useState('Enter text here ..');
+
+    const countWords = (text) =>{
+        let words;
+        if( text===" " || text.length === 0)
+          words = 0;
+        else
+          words = text.trim().split(/\s+/).length;
+        return words;
+      };
+
+
     return (
         <>
         <div className='container' style={{color: props.mode === 'light'?'black':'white'}}>
@@ -60,10 +71,10 @@ export default function TextForm(props) {
                 Remove Extra Spaces
             </button>
         </div>
-
+        
         <div className='container my-3' style={{color: props.mode === 'light'?'grey':'white'}}>
             <h2>Your text summary</h2>
-            <p>{text.split(" ").length} words and {text.length} characters</p>
+            <p>{countWords(text)} words and {text.length} characters</p>
             <p>{0.008 * text.split(" ").length} minutes to read</p>
             <h2>Preview</h2>
             <p>{text}</p>
